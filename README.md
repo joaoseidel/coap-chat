@@ -12,6 +12,11 @@
 * Github: [@joaoseidel](https://github.com/joaoseidel)
 * LinkedIn: [@joaoseidel](https://linkedin.com/in/joaoseidel)
 
+👤 **Jessica Amarante**
+
+* Github: [@jessicaamarantee](https://github.com/jessicaamarantee)
+* LinkedIn: [@jessica-amarante-](https://www.linkedin.com/in/jessica-amarante-/)
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
