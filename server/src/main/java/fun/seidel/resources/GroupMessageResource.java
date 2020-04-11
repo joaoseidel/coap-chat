@@ -20,7 +20,7 @@ import fun.seidel.model.Message;
 
 public class GroupMessageResource extends CoapResource {
 
-    public static final int JSON_CONTENT_FORM = 50;
+    private static final int JSON_CONTENT_FORM = 50;
 
     public GroupMessageResource(String name) {
         super(name);
@@ -28,10 +28,6 @@ public class GroupMessageResource extends CoapResource {
 
     @Override
     public void handleGET(CoapExchange exchange) {
-        if (exchange.getRequestOptions().getUriQuery().isEmpty()) {
-            exchange.respond(new Gson().toJson(Groups.findAll()));
-        }
-
         OptionSet requestOptions = exchange.getRequestOptions();
         requestOptions.getUriQuery().forEach(queryParam -> {
             Groups.find(UUID.fromString(queryParam)).ifPresent(
@@ -44,6 +40,8 @@ public class GroupMessageResource extends CoapResource {
                     }
             );
         });
+
+        exchange.respond(NOT_FOUND);
     }
 
     @Override

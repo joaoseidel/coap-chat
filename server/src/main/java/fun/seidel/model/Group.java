@@ -11,6 +11,7 @@ public class Group implements Serializable {
     private String name;
     private List<User> connectedUsers = new ArrayList<>();
     private List<Message> messages = new ArrayList<>();
+    private transient boolean defaultGroup;
 
     public UUID getUuid() {
         return uuid;
@@ -45,6 +46,15 @@ public class Group implements Serializable {
 
     public Group setMessages(List<Message> messages) {
         this.messages = messages;
+        return this;
+    }
+
+    public boolean isDefaultGroup() {
+        return defaultGroup;
+    }
+
+    public Group setDefaultGroup(boolean defaultGroup) {
+        this.defaultGroup = defaultGroup;
         return this;
     }
 }
