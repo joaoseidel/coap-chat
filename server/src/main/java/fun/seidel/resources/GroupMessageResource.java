@@ -18,11 +18,11 @@ import com.google.gson.Gson;
 import fun.seidel.cache.Groups;
 import fun.seidel.model.Message;
 
-public class GroupResource extends CoapResource {
+public class GroupMessageResource extends CoapResource {
 
     public static final int JSON_CONTENT_FORM = 50;
 
-    public GroupResource(String name) {
+    public GroupMessageResource(String name) {
         super(name);
     }
 
@@ -37,7 +37,7 @@ public class GroupResource extends CoapResource {
             Groups.find(UUID.fromString(queryParam)).ifPresent(
                     group -> {
                         Response response = new Response(CONTENT);
-                        response.setPayload(new Gson().toJson(group));
+                        response.setPayload(new Gson().toJson(group.getMessages()));
                         response.setOptions(new OptionSet().setContentFormat(JSON_CONTENT_FORM));
 
                         exchange.respond(response);

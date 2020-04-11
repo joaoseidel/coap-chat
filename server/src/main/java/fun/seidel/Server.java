@@ -6,12 +6,12 @@ import org.eclipse.californium.core.CoapServer;
 
 import fun.seidel.cache.Groups;
 import fun.seidel.model.Group;
-import fun.seidel.resources.GroupResource;
+import fun.seidel.resources.GroupMessageResource;
 
 public class Server extends CoapServer {
 
     public Server() {
-        add(new GroupResource("groups"));
+        add(new GroupMessageResource("groups"));
 
         Group globalChat = new Group()
                 .setUuid(UUID.randomUUID())
