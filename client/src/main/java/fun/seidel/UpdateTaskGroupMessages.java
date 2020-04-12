@@ -20,14 +20,17 @@ import com.google.gson.reflect.TypeToken;
 
 import fun.seidel.model.Message;
 
-public class UpdateTaskMessages extends TimerTask {
+public class UpdateTaskGroupMessages extends TimerTask {
     private static final String GROUPS_MESSAGE_RESOURCE_URL = BASE_URL + "/groups-message";
 
     private static HashMap<UUID, Message> groupMessages = new HashMap<>();
     private UUID uuid;
+    private String senderUsername;
+    private boolean popup;
 
-    public UpdateTaskMessages(String uuid) {
+    public UpdateTaskGroupMessages(String uuid, String senderUsername) {
         this.uuid = UUID.fromString(uuid);
+        this.senderUsername = senderUsername;
     }
 
     @Override
@@ -41,13 +44,30 @@ public class UpdateTaskMessages extends TimerTask {
                         .fromJson(get.getResponseText(), new TypeToken<ArrayList<Message>>() {
                         }.getType());
 
-                if (groupMessages.size() != messages.size()) {
+                if (groupMessages.isEmpty() && !popup) {
                     messages.forEach(message -> {
                         if (!groupMessages.containsKey(message.getUuid())) {
-                            System.out.println(message.getMessage());
+                            if (!message.getSender().equals(senderUsername)) {
+                                System.out.println(message.getSender() + ": " + message.getMessage());
+                            } else {
+                                System.out.println(message.getMessage());
+                            }
                             groupMessages.put(message.getUuid(), message);
                         }
                     });
+                    popup = true;
+                    return;
+                }
+
+                if (groupMessages.size() != messages.size()) {
+                    messages.stream()
+                            .filter(message -> !message.getSender().equals(senderUsername))
+                            .forEach(message -> {
+                                if (!groupMessages.containsKey(message.getUuid())) {
+                                    System.out.println(message.getSender() + ": " + message.getMessage());
+                                    groupMessages.put(message.getUuid(), message);
+                                }
+                            });
                 }
             }
         } catch (ConnectorException | IOException connectorException) {
