@@ -9,7 +9,6 @@ public class Group implements Serializable {
 
     private UUID uuid;
     private String name;
-    private List<User> connectedUsers = new ArrayList<>();
     private List<Message> messages = new ArrayList<>();
     private transient boolean defaultGroup;
 
@@ -28,15 +27,6 @@ public class Group implements Serializable {
 
     public Group setName(String name) {
         this.name = name;
-        return this;
-    }
-
-    public List<User> getConnectedUsers() {
-        return connectedUsers;
-    }
-
-    public Group setConnectedUsers(List<User> connectedUsers) {
-        this.connectedUsers = connectedUsers;
         return this;
     }
 
