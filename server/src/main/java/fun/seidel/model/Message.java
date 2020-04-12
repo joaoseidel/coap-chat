@@ -6,7 +6,7 @@ import java.util.UUID;
 public class Message {
 
     private UUID uuid;
-    private UUID sender;
+    private String sender;
     private UUID destination;
     private String message;
     private Date creationDate;
@@ -20,11 +20,11 @@ public class Message {
         return this;
     }
 
-    public UUID getSender() {
+    public String getSender() {
         return sender;
     }
 
-    public Message setSender(UUID sender) {
+    public Message setSender(String sender) {
         this.sender = sender;
         return this;
     }
