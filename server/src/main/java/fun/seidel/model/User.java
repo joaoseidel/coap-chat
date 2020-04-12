@@ -5,25 +5,15 @@ import java.util.UUID;
 
 public class User implements Serializable {
 
-    private UUID uuid;
-    private String name;
+    private String username;
     private UUID messagingWith;
 
-    public UUID getUuid() {
-        return uuid;
+    public String getUsername() {
+        return username;
     }
 
-    public User setUuid(UUID uuid) {
-        this.uuid = uuid;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public User setName(String name) {
-        this.name = name;
+    public User setUsername(String username) {
+        this.username = username;
         return this;
     }
 
