@@ -5,8 +5,18 @@ import java.util.UUID;
 
 public class User implements Serializable {
 
+    private UUID uuid;
     private String username;
-    private UUID messagingWith;
+    private String privateMessaging;
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public User setUuid(UUID uuid) {
+        this.uuid = uuid;
+        return this;
+    }
 
     public String getUsername() {
         return username;
@@ -17,12 +27,12 @@ public class User implements Serializable {
         return this;
     }
 
-    public UUID getMessagingWith() {
-        return messagingWith;
+    public String getPrivateMessaging() {
+        return privateMessaging;
     }
 
-    public User setMessagingWith(UUID messagingWith) {
-        this.messagingWith = messagingWith;
+    public User setPrivateMessaging(String privateMessaging) {
+        this.privateMessaging = privateMessaging;
         return this;
     }
 }
