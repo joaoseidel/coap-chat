@@ -9,13 +9,15 @@ import fun.seidel.cache.Groups;
 import fun.seidel.model.Group;
 import fun.seidel.resources.GroupMessageResource;
 import fun.seidel.resources.GroupResource;
+import fun.seidel.resources.UsersResource;
 
 public class Server extends CoapServer {
 
     public Server() {
         add(
                 new GroupResource("groups"),
-                new GroupMessageResource("groups-message")
+                new GroupMessageResource("groups-message"),
+                new UsersResource("users")
         );
 
         Group globalChat = new Group()
