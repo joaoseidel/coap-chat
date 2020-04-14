@@ -53,7 +53,7 @@ public class GroupMessageResource extends CoapResource {
             Groups.find(UUID.fromString(queryParam)).ifPresent(group -> {
                 Message message = new Gson().fromJson(exchange.getRequestText(), Message.class)
                         .setUuid(UUID.randomUUID())
-                        .setDestination(group.getUuid())
+                        .setDestination(group.getUuid().toString())
                         .setCreationDate(new Date());
 
                 if (Objects.nonNull(message.getSender())) {

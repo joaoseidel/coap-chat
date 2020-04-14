@@ -1,29 +1,29 @@
 package fun.seidel.cache;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import fun.seidel.model.User;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Users {
-    private static final List<User> users = new ArrayList<>();
+    private static final HashSet<String> users = new HashSet<>();
 
-    public static boolean add(User group) {
-        return users.add(group);
+    public static boolean add(String username) {
+        if (users.stream().noneMatch(username::equalsIgnoreCase))
+            return users.add(username);
+        return false;
     }
 
     public static void remove(String username) {
-        find(username).ifPresent(users::remove);
+        users.stream()
+                .filter(name -> name.equalsIgnoreCase(username))
+                .findAny()
+                .ifPresent(users::remove);
     }
 
-    public static Optional<User> find(String username) {
-        return users.stream()
-                .filter(group -> group.getUsername().equals(username))
-                .findFirst();
+    public static boolean exists(String username) {
+        return users.stream().anyMatch(username::equalsIgnoreCase);
     }
 
-    public static List<User> findAll() {
+    public static Set<String> findAll() {
         return users;
     }
 }

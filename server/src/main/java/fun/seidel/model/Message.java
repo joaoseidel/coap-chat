@@ -7,7 +7,7 @@ public class Message {
 
     private UUID uuid;
     private String sender;
-    private UUID destination;
+    private String destination;
     private String message;
     private Date creationDate;
 
@@ -29,11 +29,11 @@ public class Message {
         return this;
     }
 
-    public UUID getDestination() {
+    public String getDestination() {
         return destination;
     }
 
-    public Message setDestination(UUID destination) {
+    public Message setDestination(String destination) {
         this.destination = destination;
         return this;
     }
