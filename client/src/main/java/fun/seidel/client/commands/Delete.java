@@ -5,13 +5,9 @@ import static fun.seidel.client.components.COAPClientComponent.GROUPS_RESOURCE_U
 import java.io.IOException;
 import java.util.Objects;
 
-import javax.xml.stream.XMLResolver;
-
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapResponse;
 import org.eclipse.californium.elements.exception.ConnectorException;
-import org.jline.utils.AttributedStringBuilder;
-import org.jline.utils.AttributedStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;

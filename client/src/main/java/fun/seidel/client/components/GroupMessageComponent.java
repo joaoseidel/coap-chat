@@ -6,6 +6,7 @@ import static fun.seidel.client.components.COAPClientComponent.JSON_FORMAT_CODE;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.eclipse.californium.core.CoapClient;
@@ -35,6 +36,10 @@ public class GroupMessageComponent {
 
     @Scheduled(cron = "*/1 * * * * *", zone = TIME_ZONE)
     public void getGroupMessages() throws ConnectorException, IOException {
+        if (Objects.isNull(uuid)) {
+            return;
+        }
+
         CoapClient client = coapClientComponent.get().setURI(GROUPS_MESSAGE_RESOURCE_URL + "?" + uuid);
         CoapResponse get = client.get(JSON_FORMAT_CODE);
 
@@ -62,7 +67,7 @@ public class GroupMessageComponent {
                         .filter(message -> !message.getSender().equals(coapClientComponent.getUsername()))
                         .forEach(message -> {
                             if (!groupMessages.containsKey(message.getUuid())) {
-                                System.out.println(message.getSender() + "\033[0m: " + message.getMessage());
+                                System.out.println(message.getSender() + ": " + message.getMessage());
                                 groupMessages.put(message.getUuid(), message);
                             }
                         });
@@ -76,9 +81,16 @@ public class GroupMessageComponent {
         this.uuid = uuid;
     }
 
+    public void exit() {
+        groupMessages.clear();
+        this.popup = false;
+        this.uuid = null;
+    }
+
     public void sendMessage(String uuid, String message) throws ConnectorException, IOException {
         Message sendMessage = new Message()
                 .setMessage(message)
+                .setDestination(uuid)
                 .setSender(coapClientComponent.getUsername());
 
         CoapClient sender = coapClientComponent.get().setURI(GROUPS_MESSAGE_RESOURCE_URL + "?" + uuid);

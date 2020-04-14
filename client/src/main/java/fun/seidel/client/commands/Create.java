@@ -56,7 +56,7 @@ public class Create {
                     .append(" (")
                     .append(shellHelper.getColored(createdGroup.getUuid().toString(), PromptColor.CYAN))
                     .append(")").append(" was created!");
-            shellHelper.printError(response.toString());
+            shellHelper.print(response.toString());
             return;
         }
 

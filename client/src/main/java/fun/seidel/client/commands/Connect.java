@@ -1,5 +1,8 @@
 package fun.seidel.client.commands;
 
+import java.io.IOException;
+
+import org.eclipse.californium.elements.exception.ConnectorException;
 import org.jline.utils.AttributedStringBuilder;
 import org.jline.utils.AttributedStyle;
 import org.springframework.shell.Availability;
@@ -23,7 +26,7 @@ public class Connect {
     public void connect(
             @ShellOption String url,
             @ShellOption String username
-    ) {
+    ) throws ConnectorException, IOException {
         coapClientComponent.connect(url, username);
     }
 
